@@ -168,7 +168,13 @@ class App extends Component {
     const { setStart, setGoal, setWall, setWeightedWall } = this.state;
     return (
       <>
-        <Nav />
+        <Nav
+          setStartNode={this.setStartNode}
+          setGoalNode={this.setGoalNode}
+          setWallNode={this.setWallNode}
+          setWeightedWall={this.setWeightedWall}
+        />
+
         <button onClick={this.setStartNode}>Set Start Node</button>
         <button onClick={this.setGoalNode}>Set Goal Node</button>
         <button onClick={this.setWallNode}>Set wall Node</button>

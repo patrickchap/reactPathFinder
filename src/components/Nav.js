@@ -3,6 +3,12 @@ import "./nav.css";
 
 export class Nav extends Component {
   render() {
+    const {
+      setStartNode,
+      setGoalNode,
+      setWallNode,
+      setWeightedWall,
+    } = this.props;
     return (
       <div className="nav-container">
         <div className="dropdown">
@@ -15,14 +21,14 @@ export class Nav extends Component {
             Set Nodes
           </button>
           <div id="myDropdown" className="dropdown-content">
-            <a href="/#">start</a>
+            {/* <a href="/#">start</a>
             <a href="/#">goal</a>
             <a href="/#">wall</a>
-            <a href="/#">Weighted Wall</a>
-            {/* <button>start</button>
-            <button>goal</button>
-            <button>wall</button>
-            <button>Weighted Wall</button> */}
+            <a href="/#">Weighted Wall</a> */}
+            <button onClick={setStartNode}>start</button>
+            <button onClick={setGoalNode}>goal</button>
+            <button onClick={setWallNode}>wall</button>
+            <button onClick={setWeightedWall}>Weighted Wall</button>
           </div>
         </div>
 
@@ -36,11 +42,11 @@ export class Nav extends Component {
             Algorithm
           </button>
           <div id="myDropdown algo" className="dropdown-content">
-            <a href="/#">bfs</a>
-            <a href="/#">dij</a>
+            {/* <a href="/#">bfs</a>
+            <a href="/#">dij</a> */}
 
-            {/* <button>bfs</button>
-            <button>dij</button> */}
+            <button>bfs</button>
+            <button>dij</button>
           </div>
         </div>
 

@@ -1,0 +1,36 @@
+.node {
+  border: 2px solid black;
+
+  width: 25px;
+  height: 25px;
+  /* display: inline-block; */
+
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.start-node {
+  background-color: green;
+}
+
+.goal-node {
+  background-color: red;
+}
+
+.wall-node {
+  background-color: black;
+}
+
+.set-search {
+  background-color: lightblue;
+}
+
+.set-path {
+  background-color: pink;
+}
+
+.set-weighted-wall {
+  background-color: brown;
+}

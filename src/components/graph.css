@@ -1,0 +1,12 @@
+.graph {
+  margin: 100px auto;
+  text-align: center;
+
+  display: flex;
+  flex-direction: row;
+
+  align-content: center;
+  justify-content: center;
+
+  /* position: absolute; */
+}

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Graph from "./components/Graph";
-import bfs from "./components/unWeightedSearch/bfs";
-import { dijkstra } from "./components/weightedSearch/dijkstra";
 import Nav from "./components/Nav";
 
 class App extends Component {
@@ -78,94 +76,17 @@ class App extends Component {
     });
   };
 
-  runDijkstra(grid, startNode, goalNode) {
-    if (startNode == null || goalNode == null) {
-      alert("set start and goal");
-      return;
-    }
-
-    this.setNeighbors();
-    const { visitedNodes, shortestPath } = dijkstra(grid, startNode, goalNode);
-    this.drowShortestPath(visitedNodes, shortestPath);
-  }
-
-  runBfs(grid, startNode, goalNode) {
-    if (startNode == null || goalNode == null) {
-      alert("set start and goal");
-      return;
-    }
-
-    this.setNeighbors();
-    const { visitedNodes, shortestPath } = bfs(grid, startNode, goalNode);
-    this.drowShortestPath(visitedNodes, shortestPath);
-  }
-
-  drowShortestPath(visitedNodes, shortestPath) {
-    for (let i = 0; i <= visitedNodes.length; i++) {
-      if (i === visitedNodes.length) {
-        setTimeout(() => {
-          this.drawShortesPath(shortestPath);
-        }, 3 * i);
-        return;
-      }
-      setTimeout(() => {
-        var node = visitedNodes[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node set-search";
-      }, 3 * i);
-    }
-  }
-
-  drawShortesPath(shortestPath) {
-    for (let i = 0; i < shortestPath.length; i++) {
-      setTimeout(() => {
-        var node = shortestPath[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node set-path";
-      }, 20 * i);
-    }
-  }
-
-  //used for search algorims
-  //sets the n,e,w,s neighbor for each node
-  setNeighbors() {
-    const { grid, Dim } = this.state;
-
-    for (let row = 0; row < Dim.ROW; row++) {
-      for (let col = 0; col < Dim.COL; col++) {
-        var currentNode = grid[row][col];
-
-        if (row > 0) {
-          var nodeAbove = grid[row - 1][col];
-          if (nodeAbove.classification !== "wall-node") {
-            currentNode.neighbors.push(nodeAbove);
-          }
-        }
-        if (row < Dim.ROW - 1) {
-          var nodeBelow = grid[row + 1][col];
-          if (nodeBelow.classification !== "wall-node") {
-            currentNode.neighbors.push(nodeBelow);
-          }
-        }
-        if (col > 0) {
-          var nodeLeft = grid[row][col - 1];
-          if (nodeLeft.classification !== "wall-node") {
-            currentNode.neighbors.push(nodeLeft);
-          }
-        }
-        if (col < Dim.COL - 1) {
-          var nodeRight = grid[row][col + 1];
-          if (nodeRight.classification !== "wall-node") {
-            currentNode.neighbors.push(nodeRight);
-          }
-        }
-      }
-    }
-    this.setState({ grid: grid });
-  }
-
   render() {
-    const { setStart, setGoal, setWall, setWeightedWall } = this.state;
+    const {
+      setStart,
+      setGoal,
+      setWall,
+      setWeightedWall,
+      grid,
+      startNode,
+      goalNode,
+      Dim,
+    } = this.state;
     return (
       <>
         <Nav
@@ -173,34 +94,11 @@ class App extends Component {
           setGoalNode={this.setGoalNode}
           setWallNode={this.setWallNode}
           setWeightedWall={this.setWeightedWall}
+          grid={grid}
+          startNode={startNode}
+          goalNode={goalNode}
+          Dim={Dim}
         />
-
-        <button onClick={this.setStartNode}>Set Start Node</button>
-        <button onClick={this.setGoalNode}>Set Goal Node</button>
-        <button onClick={this.setWallNode}>Set wall Node</button>
-        <button onClick={this.setWeightedWall}>Set Weighted Wall Node</button>
-        <button
-          onClick={() => {
-            this.runBfs(
-              this.state.grid,
-              this.state.startNode,
-              this.state.goalNode
-            );
-          }}
-        >
-          Run Bfs
-        </button>
-        <button
-          onClick={() => {
-            this.runDijkstra(
-              this.state.grid,
-              this.state.startNode,
-              this.state.goalNode
-            );
-          }}
-        >
-          Run Dijkstra
-        </button>
 
         <div className="App">
           <Graph

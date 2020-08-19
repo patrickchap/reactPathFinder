@@ -1,12 +1,8 @@
 .graph {
   margin: 50px auto;
-  text-align: center;
+}
 
+.grid_row {
   display: flex;
-  flex-direction: row;
-
-  align-content: center;
   justify-content: center;
-
-  /* position: absolute; */
 }

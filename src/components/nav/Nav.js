@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import "./nav.css";
-import bfs from "../components/unWeightedSearch/bfs";
-import { dijkstra } from "../components/weightedSearch/dijkstra";
+import bfs from "../../components/unWeightedSearch/bfs";
+import { dijkstra } from "../../components/weightedSearch/dijkstra";
+import AlgoButton from "./AlgoButton";
+import SetNodesButton from "./SetNodesButton";
+import Run from "./Run";
 
 export class Nav extends Component {
+  constructor() {
+    super();
+    this.state = {
+      chooseAlogState: true,
+      algoToRun: "",
+    };
+  }
+
+  setAlgoToRun = (algo) => {
+    console.log("set algo");
+    this.setState({ algoToRun: algo });
+  };
+
   drowShortestPath(visitedNodes, shortestPath) {
     for (let i = 0; i <= visitedNodes.length; i++) {
       if (i === visitedNodes.length) {
@@ -66,7 +82,7 @@ export class Nav extends Component {
     // this.setState({ grid: grid });
   }
 
-  runBfs(grid, startNode, goalNode) {
+  runBfs = (grid, startNode, goalNode) => {
     if (startNode == null || goalNode == null) {
       alert("set start and goal");
       return;
@@ -75,9 +91,9 @@ export class Nav extends Component {
     this.setNeighbors();
     const { visitedNodes, shortestPath } = bfs(grid, startNode, goalNode);
     this.drowShortestPath(visitedNodes, shortestPath);
-  }
+  };
 
-  runDijkstra(grid, startNode, goalNode) {
+  runDijkstra = (grid, startNode, goalNode) => {
     if (startNode == null || goalNode == null) {
       alert("set start and goal");
       return;
@@ -86,7 +102,7 @@ export class Nav extends Component {
     this.setNeighbors();
     const { visitedNodes, shortestPath } = dijkstra(grid, startNode, goalNode);
     this.drowShortestPath(visitedNodes, shortestPath);
-  }
+  };
 
   render() {
     const {
@@ -98,63 +114,54 @@ export class Nav extends Component {
       startNode,
       goalNode,
     } = this.props;
+
     return (
       <div className="nav-container">
-        <div className="dropdown">
-          <button
-            onClick={() => {
-              toggleButton("myDropdown");
-            }}
-            className="dropbtn"
-          >
-            Set Nodes
-          </button>
-          <div id="myDropdown" className="dropdown-content">
-            {/* <a href="/#">start</a>
-            <a href="/#">goal</a>
-            <a href="/#">wall</a>
-            <a href="/#">Weighted Wall</a> */}
-            <button onClick={setStartNode}>start</button>
-            <button onClick={setGoalNode}>goal</button>
-            <button onClick={setWallNode}>wall</button>
-            <button onClick={setWeightedWall}>Weighted Wall</button>
-          </div>
-        </div>
-
-        <div className="dropdown">
-          <button
-            onClick={() => {
-              toggleButton("myDropdown algo");
-            }}
-            className="dropbtn"
-          >
-            Algorithm
-          </button>
-          <div id="myDropdown algo" className="dropdown-content">
-            {/* <a href="/#">bfs</a>
-            <a href="/#">dij</a> */}
-
-            <button
-              onClick={() => {
-                this.runBfs(grid, startNode, goalNode);
-              }}
-            >
-              bfs
-            </button>
-            <button
-              onClick={() => {
-                this.runDijkstra(grid, startNode, goalNode);
-              }}
-            >
-              dij
-            </button>
-          </div>
-        </div>
-
-        {/* <button>Weighted Wall</button>
-
-        <button>bfs</button>
-        <button>dij</button> */}
+        <AlgoButton
+          toggleButton={() => {
+            toggleButton("myDropdown algo");
+          }}
+          setAlgoToRun={this.setAlgoToRun}
+        />
+        {this.state.algoToRun === "bfs" && (
+          <>
+            <SetNodesButton
+              toggleButton={toggleButton}
+              setStartNode={setStartNode}
+              setGoalNode={setGoalNode}
+              setWallNode={setWallNode}
+              setWeightedWall={setWeightedWall}
+              searchType={"nonWeighted"}
+            />
+            <Run
+              name="BFS"
+              algo={this.runBfs}
+              grid={grid}
+              startNode={startNode}
+              goalNode={goalNode}
+            />
+          </>
+        )}
+        {this.state.algoToRun === "dij" && (
+          <>
+            <SetNodesButton
+              toggleButton={toggleButton}
+              setStartNode={setStartNode}
+              setGoalNode={setGoalNode}
+              setWallNode={setWallNode}
+              setWeightedWall={setWeightedWall}
+              searchType={"Weighted"}
+            />
+            <Run
+              className="runButton"
+              name="Dijkstra"
+              algo={this.runDijkstra}
+              grid={grid}
+              startNode={startNode}
+              goalNode={goalNode}
+            />
+          </>
+        )}
       </div>
     );
   }

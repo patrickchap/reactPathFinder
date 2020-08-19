@@ -19,7 +19,6 @@ export default function bfs(grid, start, goal) {
       //if goal is found set camefrom nodes to pink to show the shortes path starting node
       while (node.nodeComeFrom !== startNode) {
         node = node.nodeComeFrom;
-        // node.classification = 'set-path';
         shortestPath.push(node);
       }
       return { visitedNodes, shortestPath };
@@ -29,7 +28,6 @@ export default function bfs(grid, start, goal) {
       if (!curr.neighbors[x].isVisited) {
         curr.neighbors[x].isVisited = true;
         if (curr.neighbors[x] !== goalGoal) {
-          // curr.neighbors[x].classification = 'set-search';
           visitedNodes.push(curr.neighbors[x]);
         }
         curr.neighbors[x].nodeComeFrom = curr;

@@ -110,7 +110,7 @@ export default class Graph extends Component {
       <div className="graph">
         {grid.map((row, rowIdx) => {
           return (
-            <div key={rowIdx}>
+            <div className="grid_row" key={rowIdx}>
               {row.map((node, nodeIndex) => {
                 const {
                   row,

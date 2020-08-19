@@ -1,21 +1,17 @@
 .nav-container {
+  display: flex;
   background-color: rgb(124, 202, 228);
   height: 65px;
-  width: 100%;
+  /* flex: 1; */
 }
 
 .dropbtn {
-  /* background-color: #3498db;
-  color: white; */
-  /* padding: 16px; */
   background-color: rgb(124, 202, 228);
-  width: 10rem;
+  min-width: 10rem;
   height: 65px;
   font-size: 16px;
   font-weight: bold;
   color: white;
-
-  /* border: 1px solid black; */
   border: none;
   cursor: pointer;
 }
@@ -38,10 +34,11 @@
   display: none;
   position: absolute;
   background-color: #dfd9d9;
-  /* min-width: 160px; */
   width: 10rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  /* z-index: 1; */
+}
+.runButton {
+  width: 10rem;
 }
 
 .dropdown-content button {
@@ -60,4 +57,20 @@
 
 .show {
   display: block;
+}
+
+.runAlgorithm {
+  background-color: rgb(124, 202, 228);
+  width: 10rem;
+  height: 65px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+.runAlgorithm:hover,
+.runAlgorithm:active {
+  background-color: #9cc1d6;
 }

@@ -1,14 +1,11 @@
 .node {
-  border: 2px solid black;
+  /* flex: 0 1 auto; */
 
   width: 25px;
-  height: 25px;
-  /* display: inline-block; */
+  /* height: 25px; */
+  padding-bottom: 2%;
 
-  align-content: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  border: 1px solid black;
 }
 
 .start-node {

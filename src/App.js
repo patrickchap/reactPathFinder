@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Graph from "./components/Graph";
-import Nav from "./components/Nav";
+
+import Nav from "./components/nav/Nav";
 
 class App extends Component {
   constructor() {
@@ -16,8 +17,8 @@ class App extends Component {
       startNode: null,
       goalNode: null,
       Dim: {
-        ROW: 40,
-        COL: 20,
+        ROW: 30,
+        COL: 40,
       },
     };
   }
@@ -26,6 +27,24 @@ class App extends Component {
     const newGrid = createGrid(this.state);
     this.setState({ grid: newGrid });
   }
+
+  resetGrid = () => {
+    this.setState({
+      setStart: false,
+      setGoal: false,
+      setWall: false,
+      setWeightedWall: false,
+      grid: [],
+      startNode: null,
+      goalNode: null,
+      Dim: {
+        ROW: 40,
+        COL: 20,
+      },
+    });
+    const newGrid = createGrid(this.state);
+    this.setState({ grid: newGrid });
+  };
 
   //sets the starting node when clicked on graph
   setStart = (node) => {

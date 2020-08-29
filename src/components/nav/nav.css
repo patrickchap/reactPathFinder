@@ -18,6 +18,9 @@
   justify-content: center;
   align-items: center;
 }
+button > * {
+  pointer-events: none;
+}
 
 .dropbtn {
   outline: none;

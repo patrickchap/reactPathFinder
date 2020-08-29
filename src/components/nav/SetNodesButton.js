@@ -21,12 +21,7 @@ export class SetNodesButton extends Component {
           className="dropbtn"
         >
           Set Nodes
-          <ArrowDropDownIcon
-            onClick={() => {
-              toggleButton("myDropdown");
-              // console.log("clickcckckck");
-            }}
-          />
+          <ArrowDropDownIcon />
         </button>
         <div id="myDropdown" className="dropdown-content">
           <button onClick={setStartNode}>start</button>

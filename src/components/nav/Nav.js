@@ -166,7 +166,7 @@ export class Nav extends Component {
 export default Nav;
 
 let toggleButton = (id) => {
-  //   console.log("id " + id);
+  // console.log("id " + id);
   document.getElementById(`${id}`).classList.toggle("show");
 };
 

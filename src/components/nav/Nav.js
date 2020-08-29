@@ -2,23 +2,16 @@ import React, { Component } from "react";
 import "./nav.css";
 import bfs from "../../components/unWeightedSearch/bfs";
 import { dijkstra } from "../../components/weightedSearch/dijkstra";
-import AlgoButton from "./AlgoButton";
 import SetNodesButton from "./SetNodesButton";
 import Run from "./Run";
 
 export class Nav extends Component {
-  constructor() {
-    super();
-    this.state = {
-      chooseAlogState: true,
-      algoToRun: "",
-    };
-  }
-
-  setAlgoToRun = (algo) => {
-    console.log("set algo");
-    this.setState({ algoToRun: algo });
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     algoToRun: "",
+  //   };
+  // }
 
   drowShortestPath(visitedNodes, shortestPath) {
     for (let i = 0; i <= visitedNodes.length; i++) {
@@ -79,7 +72,6 @@ export class Nav extends Component {
         }
       }
     }
-    // this.setState({ grid: grid });
   }
 
   runBfs = (grid, startNode, goalNode) => {
@@ -113,17 +105,15 @@ export class Nav extends Component {
       grid,
       startNode,
       goalNode,
+      algoToRun,
+      resetGrid,
     } = this.props;
+
+    // const { algoToRun } = this.state;
 
     return (
       <div className="nav-container">
-        <AlgoButton
-          toggleButton={() => {
-            toggleButton("myDropdown algo");
-          }}
-          setAlgoToRun={this.setAlgoToRun}
-        />
-        {this.state.algoToRun === "bfs" && (
+        {algoToRun === "bfs" && (
           <>
             <SetNodesButton
               toggleButton={toggleButton}
@@ -140,9 +130,12 @@ export class Nav extends Component {
               startNode={startNode}
               goalNode={goalNode}
             />
+            <button className="nav__run" onClick={resetGrid}>
+              Reset Grid
+            </button>
           </>
         )}
-        {this.state.algoToRun === "dij" && (
+        {algoToRun === "dij" && (
           <>
             <SetNodesButton
               toggleButton={toggleButton}
@@ -160,6 +153,9 @@ export class Nav extends Component {
               startNode={startNode}
               goalNode={goalNode}
             />
+            <button className="nav__run" onClick={resetGrid}>
+              Reset Grid
+            </button>
           </>
         )}
       </div>

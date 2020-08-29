@@ -59,7 +59,8 @@
   display: block;
 }
 
-.runAlgorithm {
+.runAlgorithm,
+.nav__run {
   background-color: rgb(124, 202, 228);
   width: 10rem;
   height: 65px;
@@ -71,6 +72,13 @@
 }
 
 .runAlgorithm:hover,
-.runAlgorithm:active {
+.runAlgorithm:active .nav__run:hover,
+.nav__run:active {
   background-color: #9cc1d6;
+}
+
+.nav__run {
+  margin-left: auto;
+  margin-right: 20px;
+  /* align-self: flex-end; */
 }

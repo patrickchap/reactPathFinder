@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import Graph from "./components/Graph";
-
 import Nav from "./components/nav/Nav";
+import HomeScreen from "./components/HomeScreen/HomeScreen";
 
 class App extends Component {
   constructor() {
@@ -16,9 +15,10 @@ class App extends Component {
       grid: [],
       startNode: null,
       goalNode: null,
+      algoToRun: "",
       Dim: {
         ROW: 30,
-        COL: 40,
+        COL: 50,
       },
     };
   }
@@ -38,17 +38,30 @@ class App extends Component {
       startNode: null,
       goalNode: null,
       Dim: {
-        ROW: 40,
-        COL: 20,
+        ROW: 30,
+        COL: 50,
       },
     });
     const newGrid = createGrid(this.state);
     this.setState({ grid: newGrid });
+    this.fixClassName();
+  };
+
+  fixClassName = () => {
+    for (let row = 0; row < this.state.Dim.ROW; row++) {
+      for (let col = 0; col < this.state.Dim.COL; col++) {
+        document.getElementById(`node-${row}-${col}`).className = "node";
+      }
+    }
   };
 
   //sets the starting node when clicked on graph
   setStart = (node) => {
     this.setState({ startNode: node });
+  };
+
+  setAlgoToRun = (algo) => {
+    this.setState({ algoToRun: algo });
   };
 
   //sets the goal node when clicked on graph
@@ -105,31 +118,41 @@ class App extends Component {
       startNode,
       goalNode,
       Dim,
+      algoToRun,
     } = this.state;
     return (
       <>
-        <Nav
-          setStartNode={this.setStartNode}
-          setGoalNode={this.setGoalNode}
-          setWallNode={this.setWallNode}
-          setWeightedWall={this.setWeightedWall}
-          grid={grid}
-          startNode={startNode}
-          goalNode={goalNode}
-          Dim={Dim}
-        />
+        {algoToRun === "" && <HomeScreen setAlgoToRun={this.setAlgoToRun} />}
+        {algoToRun !== "" && (
+          <>
+            <Nav
+              setStartNode={this.setStartNode}
+              setGoalNode={this.setGoalNode}
+              setWallNode={this.setWallNode}
+              setWeightedWall={this.setWeightedWall}
+              grid={grid}
+              startNode={startNode}
+              goalNode={goalNode}
+              Dim={Dim}
+              algoToRun={algoToRun}
+              resetGrid={this.resetGrid}
+            />
 
-        <div className="App">
-          <Graph
-            setNode={{ setStart, setGoal, setWall, setWeightedWall }}
-            setOriginalState={this.setOriginalState}
-            grid={this.state.grid}
-            setGrid={this.setGrid}
-            startNode={this.setStart}
-            goalNode={this.setGoal}
-            Dim={this.state.Dim}
-          />
-        </div>
+            <div className="App">
+              <Graph
+                setNode={{ setStart, setGoal, setWall, setWeightedWall }}
+                setOriginalState={this.setOriginalState}
+                grid={this.state.grid}
+                setGrid={this.setGrid}
+                startNode={this.setStart}
+                goalNode={this.setGoal}
+                Dim={this.state.Dim}
+                startNodeCheck={this.state.startNode}
+                goalNodeCheck={goalNode}
+              />
+            </div>
+          </>
+        )}
       </>
     );
   }

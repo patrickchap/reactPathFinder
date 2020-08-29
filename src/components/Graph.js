@@ -6,8 +6,9 @@ export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startSet: false,
-      endSet: false,
+      childGrid: this.props.grid,
+      // startSet: false,
+      // endSet: false,
       mouseDown: false,
     };
   }
@@ -16,7 +17,8 @@ export default class Graph extends Component {
     const { Dim } = this.props;
     for (let row = 0; row < Dim.ROW; row++) {
       for (let col = 0; col < Dim.COL; col++) {
-        // console.log(this.state.grid[row][col])
+        console.log(this.props.grid[row][col], " <<<<<<<<<<<<<<");
+
         if (this.props.grid[row][col].classification === "start-node") {
           console.log(`${row}, ${col}`);
           return { row, col };
@@ -44,7 +46,8 @@ export default class Graph extends Component {
 
     if (setStart) {
       // Check if there is already a start node set
-      if (this.state.startSet) {
+      // if (this.state.startSet) {
+      if (this.props.startNodeCheck !== null) {
         //get row and colomn of previes start node and set to white
         const { row, col } = this.findStartingNode();
         removeSetNode(this.props.grid, row, col);
@@ -52,14 +55,15 @@ export default class Graph extends Component {
       }
       //set starting node green
       addStartingNod(this.props.grid, row, col, startNode);
-      this.setState({ startSet: true });
+      // this.setState({ startSet: true });
     } else if (setGoal) {
-      if (this.state.endSet) {
+      // if (this.state.endSet) {
+      if (this.props.goalNodeCheck !== null) {
         const { row, col } = this.findGoalNode();
         removeSetNode(this.props.grid, row, col);
       }
       addGoalNode(this.props.grid, row, col, goalNode);
-      this.setState({ endSet: true });
+      // this.setState({ endSet: true });
     }
 
     this.props.setOriginalState();
@@ -103,12 +107,20 @@ export default class Graph extends Component {
 
     this.setState({ mouseDown: false });
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.grid !== prevProps.grid) {
+      this.setState({
+        childGrid: this.props.grid,
+      });
+    }
+  }
 
   render() {
-    const { grid } = this.props;
+    // const { grid } = this.props;
+    const { childGrid } = this.state;
     return (
       <div className="graph">
-        {grid.map((row, rowIdx) => {
+        {childGrid.map((row, rowIdx) => {
           return (
             <div className="grid_row" key={rowIdx}>
               {row.map((node, nodeIndex) => {
@@ -126,7 +138,7 @@ export default class Graph extends Component {
                     col={col}
                     row={row}
                     // setNode={this.props.setNode}
-                    setOriginalState={this.props.setOriginalState}
+                    // setOriginalState={this.props.setOriginalState}
                     click={(row, col) => {
                       this.handleClick(row, col);
                     }}

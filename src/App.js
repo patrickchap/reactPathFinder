@@ -135,6 +135,7 @@ class App extends Component {
               goalNode={goalNode}
               Dim={Dim}
               algoToRun={algoToRun}
+              setAlgoToRun={this.setAlgoToRun}
               resetGrid={this.resetGrid}
             />
 

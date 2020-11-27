@@ -130,6 +130,9 @@ export class Nav extends Component {
               startNode={startNode}
               goalNode={goalNode}
             />
+            <button className="nav__changeAlog" onClick={() => this.props.setAlgoToRun("")}>
+              Change Algorithm
+            </button>
             <button className="nav__run" onClick={resetGrid}>
               Reset Grid
             </button>
@@ -153,6 +156,9 @@ export class Nav extends Component {
               startNode={startNode}
               goalNode={goalNode}
             />
+            <button className="nav__changeAlog" onClick={() => this.props.setAlgoToRun("")}>
+              Change Algorithm
+            </button>
             <button className="nav__run" onClick={resetGrid}>
               Reset Grid
             </button>

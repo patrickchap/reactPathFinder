@@ -2,7 +2,7 @@ This project is a visualization tool for BFS and dijkstra's.
 
 ## Running reactPathFinder
 
-If you don't have yarn installed you can find the install directions [https://classic.yarnpkg.com/en/docs/install/#mac-stable](here)
+If you don't have yarn installed you can find the install directions [here](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 
 Once yarn is installed run `yarn` 
 

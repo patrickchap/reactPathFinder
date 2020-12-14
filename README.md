@@ -4,9 +4,9 @@ This project is a visualization tool for BFS and dijkstra's.
 
 If you don't have yarn installed you can find the install directions [here](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 
-Once yarn is installed run `yarn` 
+Once yarn is installed run `yarn` in the project directory.
 
-Then in the project directory, you can run:
+Then you can run:
 
 ### `yarn start`
 
